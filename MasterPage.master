@@ -1,0 +1,43 @@
+﻿<%@ Master Language="C#" %>
+
+<!DOCTYPE html>
+
+<script runat="server">
+
+</script>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <link href="styles/StyleSheet.css" rel="stylesheet" />
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+        <div id="wrapper">
+            <div id="banner">
+                <asp:Image ID="VacationImage" runat="server" ImageUrl="~/images/vacation.jpg" />
+            </div>
+            <div id="navigation">
+                <ul id="nav">
+                    <li>
+                        <asp:HyperLink ID="Webshop" runat="server">Webshop</asp:HyperLink></li>
+                    <li>
+                        <asp:HyperLink ID="About" runat="server" NavigateUrl="~/pages/aboutUs.aspx">About Us</asp:HyperLink></li>
+                    <li>
+                        <asp:HyperLink ID="Reports" runat="server">Reports</asp:HyperLink></li>
+                    <li>
+                        <asp:HyperLink ID="Management" runat="server" NavigateUrl="~/pages/management/Management.aspx">Management</asp:HyperLink></li>
+                </ul>
+            </div>
+            <div id="content">
+                <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+                    
+                </asp:ContentPlaceHolder>
+            </div>
+        </div>
+        
+    </div>
+    </form>
+</body>
+</html>
