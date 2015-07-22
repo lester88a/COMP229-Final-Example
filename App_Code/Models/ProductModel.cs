@@ -28,7 +28,7 @@ public class ProductModel
         catch (Exception e)
         {
             
-            return e.Message;
+            return e.Message + "no idea";
         }
     }
     //update the product by the id

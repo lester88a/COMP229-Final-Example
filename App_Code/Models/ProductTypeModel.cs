@@ -78,4 +78,23 @@ public class ProductTypeModel
             return e.Message;
         }
     }
+
+    //get ProductType from db
+    public ProductType GetProduct(int id)
+    {
+        try
+        {
+            //get the database
+            FinalEntities db = new FinalEntities();
+            //get the table from db
+            ProductType pt = db.ProductTypes.Find(id);
+            return pt;
+
+        }
+        catch (Exception e)
+        {
+
+            return null;
+        }
+    }
 }

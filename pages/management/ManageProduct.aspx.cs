@@ -23,6 +23,43 @@ public partial class pages_management_ManageProduct : System.Web.UI.Page
             }
         }
     }
+
+    //FillPage() method 
+    private void FillPage(int id)
+    {
+        ProductModel pModel = new ProductModel();
+        Product product = pModel.GetProduct(id);
+        descriptionTextBox.Text = product.Description;
+        nameTextBox.Text = product.Name;
+        priceTextBox.Text = product.Price.ToString();
+        imageDropDownList.SelectedValue = product.Image;
+        typeDropDownList.SelectedValue = product.Type.ToString();
+        quantityTextBox.Text = product.Quantity.ToString();
+    }
+
+    //load the images from images folder
+    private void GetImages()
+    {
+        try
+        {
+            string[] images = Directory.GetFiles(Server.MapPath("~/images/Products"));
+            List<string> imageList = new List<string>();
+            foreach (string s in images)
+            {
+                string imageName = s.Substring(s.LastIndexOf(@"\", StringComparison.Ordinal) + 1);
+                imageList.Add(imageName);
+            }
+            imageDropDownList.DataSource = imageList;
+            imageDropDownList.AppendDataBoundItems = true;
+            imageDropDownList.DataBind();
+        }
+        catch (Exception e)
+        {
+            productMessageLabel.Text = e.Message + "no idea in getIMages()";
+        }
+
+    }
+
     protected void submitButton_Click(object sender, EventArgs e)
     {
         //get the productModle.cs function
@@ -30,7 +67,7 @@ public partial class pages_management_ManageProduct : System.Web.UI.Page
         //call the createProduct() method
         Product product = createProduct();
         //add new product
-        if (!String.IsNullOrWhiteSpace(Request.QueryString["id"]))
+        if (String.IsNullOrWhiteSpace(Request.QueryString["id"]))
         {
             //display the resultmessage and call the InSetProduct method from pm which is the productModle.cs
             productMessageLabel.Text = pm.InSetProduct(product);
@@ -58,41 +95,11 @@ public partial class pages_management_ManageProduct : System.Web.UI.Page
         p.Description = descriptionTextBox.Text;
         p.Price = Convert.ToInt32(priceTextBox.Text);
         p.Image = imageDropDownList.SelectedValue;
+        p.Quantity = Convert.ToInt32(quantityTextBox.Text);
 
         return p;
     }
 
-    //load the images from images folder
-    private void GetImages()
-    {
-        try
-        {
-            string[] images = Directory.GetFiles(Server.MapPath("~/images/Products"));
-            List<string> imageList = new List<string>();
-            foreach (string s in images)
-            {
-                string imageName = s.Substring(s.LastIndexOf(@"\", StringComparison.Ordinal) + 1);
-                imageList.Add(imageName);
-            }
-            imageDropDownList.DataSource = imageList;
-            imageDropDownList.AppendDataBoundItems = true;
-            imageDropDownList.DataBind();
-        }
-        catch (Exception e)
-        {
-            productMessageLabel.Text = e.Message;
-        }
-
-    }
-    //FillPage() method 
-    private void FillPage(int id)
-    {
-        ProductModel pModel = new ProductModel();
-        Product product = pModel.GetProduct(id);
-        descriptionTextBox.Text = product.Description;
-        nameTextBox.Text = product.Name;
-        priceTextBox.Text = product.Price.ToString();
-        imageDropDownList.SelectedValue = product.Image;
-        typeDropDownList.SelectedValue = product.Type.ToString();
-    }
+    
+   
 }

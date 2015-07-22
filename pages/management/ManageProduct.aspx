@@ -24,6 +24,11 @@
         <asp:TextBox ID="priceTextBox" runat="server"></asp:TextBox>
     </p>
     <p>
+        Quantity:</p>
+    <p>
+        <asp:TextBox ID="quantityTextBox" runat="server"></asp:TextBox>
+    </p>
+    <p>
         Image:</p>
     <p>
         <asp:DropDownList ID="imageDropDownList" runat="server">
